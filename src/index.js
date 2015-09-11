@@ -24,9 +24,11 @@ const cb = function (Handler, routerState) {
       <Provider store={store}>
         { () => <Handler {...{routerState}}/> }
       </Provider>
-      <DebugPanel top right bottom>
-        <DevTools store={store} monitor={LogMonitor} />
-      </DebugPanel>
+      { panel = env === 'debug' ? (
+        <DebugPanel top right bottom>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+      ) : null }
     </div>,
     document.getElementById('app')
   )

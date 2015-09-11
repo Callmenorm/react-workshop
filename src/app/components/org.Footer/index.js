@@ -41,7 +41,6 @@ const Nav = React.createClass({
       </Flexbox>
     )
   }
-
 })
 
 export default CSSModules(Nav, style)

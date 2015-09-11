@@ -13,6 +13,10 @@ const links = [
   {
     name: 'New Tracker',
     to: 'simpleForm'
+  },
+  {
+    name: 'Tracker',
+    to: 'tracker'
   }
 ]
 

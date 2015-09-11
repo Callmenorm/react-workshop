@@ -4,11 +4,8 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 12em;
+  height: 5%;
   width: 100%;
-}
-
-.container {
   padding: 15px;
   background-color: var(--clr-red);
 }

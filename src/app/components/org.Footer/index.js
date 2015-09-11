@@ -6,7 +6,14 @@ import { Link } from 'react-router'
 import Router from 'utils.routing'
 
 const links = [
-
+  {
+    to: 'simpleForm',
+    name: 'Contact'
+  },
+  {
+    to: 'wildPokemon',
+    name: 'About'
+  }
 ];
 
 const Nav = React.createClass({

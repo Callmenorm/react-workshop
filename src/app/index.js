@@ -21,7 +21,7 @@ const App = React.createClass({
     return (
       <div>
         <Nav />
-        <RouteHandler />
+          <RouteHandler />
         <Footer />
       </div>
     )

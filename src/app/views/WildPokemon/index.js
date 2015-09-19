@@ -2,11 +2,10 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchWildPokemon } from './state/actions'
 
+let fetchInterval = {}
 function fetchCycle (action, timeout) {
-  setTimeout(() => {
+  fetchInterval = setInterval(() => {
     action(getRandomIntInclusive(1, 150))
-
-    fetchCycle(action, getRandomIntInclusive(1000, 3000))
   }, timeout)
 }
 
@@ -32,7 +31,11 @@ const WildPokemonView = React.createClass({
 
   componentDidMount () {
     const { fetchWildPokemon } = this.props
-    fetchCycle(fetchWildPokemon)
+    fetchCycle(fetchWildPokemon, 500)
+  },
+
+  componentWillUnmount () {
+    clearInterval(fetchInterval);
   },
 
   shouldComponentUpdate (nextProps, nextState) {

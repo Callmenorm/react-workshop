@@ -35,8 +35,14 @@ const AddTrackerForm = React.createClass({
     let {inputValue} = this.state
 
     return (
-      <Flexbox tag='form' { ...{onSubmit}} direction='column' justify='center' align='center'>
-        form
+      <Flexbox
+        tag='form' { ...{onSubmit}}
+        direction='column'
+        justify='center' align='center'>
+        <input onChange={onChange} value={inputValue}/>
+        <div>
+          <button onSubmit={onSubmit}>Create New Tracker</button>
+        </div>
       </Flexbox>
     );
   }

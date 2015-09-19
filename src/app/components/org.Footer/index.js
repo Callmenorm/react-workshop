@@ -7,7 +7,7 @@ import Router from 'utils.routing'
 
 const links = [
   {
-    to: 'simpleForm',
+    to: 'tracker',
     name: 'Contact'
   },
   {

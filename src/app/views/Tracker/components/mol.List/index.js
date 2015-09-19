@@ -16,7 +16,7 @@ let List = React.createClass({
       <div>
         <Flexbox tag='ul' direction='column' wrap='wrap' align='center'>
           {trackers.map((tracker, idx) => {
-            return <li style={styles.item} key={idx}>{tracker}</li>
+            return <li style={styles.item} key={idx}>{tracker.name}</li>
           })}
         </Flexbox>
       </div>

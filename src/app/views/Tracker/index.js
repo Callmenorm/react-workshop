@@ -10,28 +10,29 @@ import AddTrackerForm from './components/org.AddTrackerForm'
 const TrackerView = React.createClass({
 
   propTypes: {
+    trackers: PropTypes.array,
+    addTracker: PropTypes.func
   },
 
   onUpdate (newActivity) {
-
+    const {addTracker} = this.props
+    addTracker({
+      name: newActivity
+    })
   },
 
   render() {
+    let {trackers} = this.props
+    let {onUpdate} = this
+
     return (
       <View column justify='center' style={styles.container}>
-        <List trackers={beginnerTrackers} />
-        <AddTrackerForm />
+        <List trackers={trackers} />
+        <AddTrackerForm onUpdate={this.onUpdate} />
       </View>
     );
   }
 })
-
-let beginnerTrackers = [
-  'something',
-  'something else',
-  'crap',
-  'stuff'
-]
 
 let styles = {
   container: {

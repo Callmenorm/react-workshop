@@ -51,7 +51,9 @@ function selector(state) {
 
 function boundActions (dispatch) {
   return {
-    addTracker: name => dispatch(submitTracker(name))
+    addTracker: name => {
+      return dispatch(submitTracker(name))
+    }
   };
 }
 

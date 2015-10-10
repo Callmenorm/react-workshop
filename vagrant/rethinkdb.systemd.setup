@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "d /run/rethinkdb 0755 rethinkdb rethinkdb -" | sudo tee /usr/lib/tmpfiles.d/rethinkdb.conf
+
+sudo mkdir /usr/lib/systemd/system
+sudo cp ./rethinkdb@.service /usr/lib/systemd/system/rethinkdb@.service
+
+sudo chmod 644 /usr/lib/tmpfiles.d/rethinkdb.conf
+sudo chmod 644 /usr/lib/systemd/system/rethinkdb@.service
+
+
+sudo touch /var/log/rethinkdb
+sudo chown rethinkdb:rethinkdb /var/log/rethinkdb
+sudo cp ./instance1.conf /etc/rethinkdb/instances.d/instance1.conf

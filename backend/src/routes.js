@@ -6,10 +6,10 @@ const OK = 200
 const SERVER_ERR = 500
 
 let get = {
-  id (req, res) {
+  tracker(req, res) {
     connFactory.getConn()
       .then((conn) => {
-        return r.table('tv_shows').run(conn)
+        return r.table('trackerList').run(conn)
       })
       .then((cursor) => {
         cursor.toArray((err, result) => {
@@ -27,28 +27,70 @@ let get = {
         res.status(SERVER_ERR)
         res.json({err})
       })
+  },
+  trackerData(req, res) {
+    connFactory.getConn()
+      .then(conn => {
+        return r.table('trackerData').run(conn)
+      })
+      .then(cursor => {
+        cursor.toArray((err, result) => {
+          if (err) {
+            res.status(SERVER_ERR)
+            res.send(err.message)
+            return
+          }
+
+          res.status(OK)
+          res.json(result)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(SERVER_ERR)
+        res.json({err})
+      })
   }
 }
 
 let post = {
-  id (req, res) {
+  trackerData(req, res) {
     connFactory.getConn()
-    .then((conn) => {
-      return r.table('tv_shows')
-        .insert([
-          req.body
-        ])
-        .run(conn)
-    })
-    .then(result => {
-      res.status(OK)
-      res.json(req.body)
-      return
-    })
-    .catch(err => {
-      res.status(SERVER_ERR)
-      res.json({err})
-    })
+      .then((conn) => {
+        return r.table('trackerData')
+          .insert([
+            req.body
+          ])
+          .run(conn)
+      })
+      .then(result => {
+        res.status(OK)
+        res.json(req.body)
+        return
+      })
+      .catch(err => {
+        res.status(SERVER_ERR)
+        res.json({err})
+      })
+  },
+  tracker(req, res) {
+    connFactory.getConn()
+      .then(conn => {
+        return r.table('trackerList')
+          .insert([
+            req.body
+          ])
+          .run(conn)
+      })
+      .then(result => {
+        res.status(OK)
+        res.json(req.body)
+        return
+      })
+      .catch(err => {
+        res.status(SERVER_ERR)
+        res.json({err})
+      })
   }
 }
 

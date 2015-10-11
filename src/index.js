@@ -33,8 +33,7 @@ const cb = function (Handler, routerState) {
 }
 
 const router = Router.create({
-  routes
-})
+routes})
 
 /**
  * Circumvent the circular dependency so routing functions

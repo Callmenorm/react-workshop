@@ -8,8 +8,14 @@ var http = require('http');
 
 app.use(bodyParser.json());
 
-app.get('/', routes.get.id);
-app.get('/:id', routes.get.id);
-app.post('/:id', routes.post.id);
+// This gets a list of the trackers
+app.get('/tracker', routes.get.tracker);
+// This gets the times for the trackers
+app.get('/tracker/:id', routes.get.trackerData);
+
+// This creates a new tracker
+app.post('/tracker', routes.post.tracker);
+// This creates a new time for the tracker
+app.post('/tracker/:id', routes.post.trackerData);
 
 http.createServer(app).listen(8089);

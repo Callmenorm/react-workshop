@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'config.axios'
+import config from 'config.env'
 
 export const REQUEST_TRACKERS = 'REQUEST_TRACKERS'
 const requestTrackers = () => ({
@@ -13,23 +14,38 @@ const receiveTrackers = (json, status) => ({
     receivedAt: Date.now()
 })
 
-export const fetchPosts = () => {
+export const fetchTrackers = () => {
   return (dispatch) => {
 
     // dispatch comes from the thunk middleware
     dispatch(requestTrackers())
 
-    return axios
+    return axios.get('/trackers')
+      .then(response => response.json)
+      .then(json => dispatch(receiveTrackers(json, 'success')))
+      .catch(json => dispatch(receiveTrackers(json, 'error')))
   }
 }
 
-export const TRACKER_SUBMITTED = 'TRACKER_SUBMITTED'
+export const NEW_TRACKER = 'NEW_TRACKER'
+const newTracker = name => ({
+    type: NEW_TRACKER,
+    name: name
+})
 
-export function submitTracker (tracker) {
-  return {
-    type: TRACKER_SUBMITTED,
-    payload: {
-      newTracker: tracker
-    }
+export const CANCEL_NEW_TRACKER = 'CANCEL_NEW_TRACKER'
+const cancelNewTracker = name => ({
+    type: CANCEL_NEW_TRACKER,
+    name: name
+})
+
+export const postTracker = trackerName => {
+  return (dispatch) => {
+    dispatch(newTracker(trackerName))
+
+    return axios.post('/tracker', {
+      name: trackerName
+    })
+      .catch(err => dispatch(cancelNewTracker(trackerName)))
   }
 }

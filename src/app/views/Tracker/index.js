@@ -1,20 +1,19 @@
 import style from './style'
-import React, { PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import Flexbox from 'obj.Flexbox'
 import View from 'react-flexbox'
 import List from './components/mol.List'
-import {connect} from 'react-redux'
-import {submitTracker} from './state/actions'
+import { connect } from 'react-redux'
+import { postTracker, fetchTrackers } from './state/actions'
 import AddTrackerForm from './components/org.AddTrackerForm'
 
 const TrackerView = React.createClass({
-
-  propTypes: {
-    trackers: PropTypes.array,
-    addTracker: PropTypes.func
+  componentDidMount() {
+    const {dispatch} = this.props
+    dispatch(fetchTrackers())
   },
 
-  onUpdate (newActivity) {
+  onUpdate(newActivity) {
     const {addTracker} = this.props
     addTracker({
       name: newActivity
@@ -22,17 +21,22 @@ const TrackerView = React.createClass({
   },
 
   render() {
-    let {trackers} = this.props
-    let {onUpdate} = this
+    let { trackers } = this.props
+    let { onUpdate } = this
 
     return (
-      <View column justify='center' style={styles.container}>
-        <List trackers={trackers} />
+    <View column justify='center' style={styles.container}>
+        <List trackers={ trackers } />
         <AddTrackerForm onUpdate={this.onUpdate} />
       </View>
-    );
+    )
   }
 })
+
+TrackerView.propTypes = {
+  trackers: PropTypes.array.isRequired,
+  addTracker: PropTypes.func.isRequired
+}
 
 let styles = {
   container: {
@@ -43,21 +47,13 @@ let styles = {
   }
 }
 
-function selector(state) {
+const mapStateToProps = (state) => {
   return {
-    trackers: state.trackers
-  };
-}
-
-function boundActions (dispatch) {
-  return {
-    addTracker: name => {
-      return dispatch(submitTracker(name))
-    }
-  };
+    trackers: state.trackers.tracker.trackers,
+    addTracker: postTracker
+  }
 }
 
 export default connect(
-  selector,
-  boundActions
+  mapStateToProps
 )(TrackerView)

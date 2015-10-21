@@ -1,15 +1,12 @@
 import React, {PropTypes} from 'react'
-import {connect} from 'react-redux'
-import CSSModules from 'react-css-modules'
 import Flexbox from 'obj.Flexbox'
-
 
 let List = React.createClass({
   propTypes: {
     trackers: PropTypes.array
   },
 
-  render() {
+  render () {
     let {trackers} = this.props
 
     return (
@@ -20,13 +17,13 @@ let List = React.createClass({
           })}
         </Flexbox>
       </div>
-    );
+    )
   }
 
 })
 
 let styles = {
   item: {listStyle: 'none', fontSize: 14, color: 'navy'}
-};
+}
 
-export default List;
+export default List

@@ -15,14 +15,3 @@ export function createReducer (initialState, handlers) {
   }
 }
 
-export function createAsyncActions (name) {
-  const base = name.toUpperCase()
-  const success = `${base}_SUCCESS`
-  const failure = `${base}_FAILURE`
-
-  return {
-    [base]: base,
-    [success]: success,
-    [failure]: failure
-  }
-}

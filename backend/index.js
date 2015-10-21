@@ -3,7 +3,9 @@ let app = express()
 let bodyParser = require('body-parser')
 let routes = require('./routes')
 let http = require('http')
+let cors = require('cors')
 
+app.use(cors())
 app.use(bodyParser.json())
 
 // This gets a list of the trackers

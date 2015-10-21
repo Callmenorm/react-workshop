@@ -8,7 +8,7 @@ import Flexbox from 'obj.Flexbox'
 const links = [
   {
     name: 'Tracked Activities',
-    to: 'wildPokemon'
+    to: 'tracker'
   },
   {
     name: 'Tracker',
@@ -17,10 +17,9 @@ const links = [
 ]
 
 const Nav = React.createClass({
-
-  renderNavItem (item, i) {
+  renderNavItem(item, i) {
     return (
-      <li styleName='item' key={i}>
+    <li styleName='item' key={i}>
         <Link styleName='link' to={item.to}>
           { item.name }
         </Link>
@@ -28,10 +27,9 @@ const Nav = React.createClass({
     )
   },
 
-  render () {
-
+  render() {
     return (
-      <Flexbox tag='header' styleName='container' justify='center'>
+    <Flexbox tag='header' styleName='container' justify='center'>
 
         <Flexbox tag='ul' justify='space-between'>
 
@@ -44,4 +42,3 @@ const Nav = React.createClass({
 })
 
 export default CSSModules(Nav, style)
-

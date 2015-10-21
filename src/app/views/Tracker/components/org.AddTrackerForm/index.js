@@ -5,24 +5,24 @@ const AddTrackerForm = React.createClass({
   getInitialState () {
     return {
       inputValue: ''
-    };
+    }
   },
 
   propTypes: {
-    onUpdate: PropTypes.func
+    onUpdate: PropTypes.func.isRequired
   },
 
   updateInput (inputValue) {
     this.setState({
       inputValue
-    });
+    })
   },
 
   onChange (e) {
     this.updateInput(e.target.value)
   },
 
-  //TODO: We actually want to do some validation here
+  // TODO: We actually want to do some validation here
   onSubmit () {
     let {inputValue} = this.state
     let {onUpdate} = this.props
@@ -30,7 +30,7 @@ const AddTrackerForm = React.createClass({
     onUpdate(inputValue)
   },
 
-  render() {
+  render () {
     let {onSubmit, onChange} = this
     let {inputValue} = this.state
 
@@ -44,7 +44,7 @@ const AddTrackerForm = React.createClass({
           <button onSubmit={onSubmit}>Create New Tracker</button>
         </div>
       </Flexbox>
-    );
+    )
   }
 
 })

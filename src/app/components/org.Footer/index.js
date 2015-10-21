@@ -11,16 +11,15 @@ const links = [
     name: 'Contact'
   },
   {
-    to: 'wildPokemon',
+    to: 'tracker',
     name: 'About'
   }
-];
+]
 
 const Nav = React.createClass({
-
-  renderNavItem (item, i) {
+  renderNavItem(item, i) {
     return (
-      <li styleName='item' key={i}>
+    <li styleName='item' key={i}>
         <Link styleName='link' to={item.to}>
           { item.name }
         </Link>
@@ -28,10 +27,9 @@ const Nav = React.createClass({
     )
   },
 
-  render () {
-
+  render() {
     return (
-      <Flexbox tag='header' styleName='root' justify='center'>
+    <Flexbox tag='header' styleName='root' justify='center'>
 
         <Flexbox tag='ul' justify='space-between'>
 

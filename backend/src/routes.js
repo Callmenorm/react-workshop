@@ -6,7 +6,7 @@ const OK = 200
 const SERVER_ERR = 500
 
 let get = {
-  tracker(req, res) {
+  tracker (req, res) {
     connFactory.getConn()
       .then((conn) => {
         return r.table('trackerList').run(conn)
@@ -28,7 +28,7 @@ let get = {
         res.json({err})
       })
   },
-  trackerData(req, res) {
+  trackerData (req, res) {
     connFactory.getConn()
       .then(conn => {
         return r.table('trackerData').run(conn)
@@ -54,7 +54,7 @@ let get = {
 }
 
 let post = {
-  trackerData(req, res) {
+  trackerData (req, res) {
     connFactory.getConn()
       .then((conn) => {
         return r.table('trackerData')
@@ -73,7 +73,7 @@ let post = {
         res.json({err})
       })
   },
-  tracker(req, res) {
+  tracker (req, res) {
     connFactory.getConn()
       .then(conn => {
         return r.table('trackerList')

@@ -50,6 +50,10 @@ export const postTracker = trackerName => {
 
     return fetch(`${dev.baseUrl}/tracker`, {
       method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         name: trackerName
       })

@@ -31,7 +31,7 @@ let get = {
   trackerData (req, res) {
     connFactory.getConn()
       .then(conn => {
-        return r.table('trackerData').run(conn)
+        return r.table('trackerList').run(conn)
       })
       .then(cursor => {
         cursor.toArray((err, result) => {
@@ -57,7 +57,7 @@ let post = {
   trackerData (req, res) {
     connFactory.getConn()
       .then((conn) => {
-        return r.table('trackerData')
+        return r.table('trackerList')
           .insert([
             req.body
           ])
@@ -76,9 +76,15 @@ let post = {
   tracker (req, res) {
     connFactory.getConn()
       .then(conn => {
+        // TODO: Need to check for the existence of this tracker.
+        // TODO: Need to make the trackers personal
         return r.table('trackerList')
           .insert([
-            req.body
+            {
+              name: req.body.name,
+              owner: req.body.owner,
+              times: []
+            }
           ])
           .run(conn)
       })

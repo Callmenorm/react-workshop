@@ -55,10 +55,10 @@ export const postTracker = trackerName => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: trackerName
+        name: trackerName,
+        owner: 'My scummy feet'
       })
     })
-      .then(response => dispatch(newTracker(trackerName)))
       .catch(err => {
         console.log(err)
         dispatch(cancelNewTracker(trackerName))

@@ -20,7 +20,6 @@ var get = {
         res.json(result);
       });
     })['catch'](function (err) {
-      console.log(err);
       res.status(SERVER_ERR);
       res.json({ err: err });
     });
@@ -40,7 +39,6 @@ var get = {
         res.json(result);
       });
     })['catch'](function (err) {
-      console.log(err);
       res.status(SERVER_ERR);
       res.json({ err: err });
     });

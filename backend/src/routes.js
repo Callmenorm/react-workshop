@@ -23,7 +23,6 @@ let get = {
         })
       })
       .catch(err => {
-        console.log(err)
         res.status(SERVER_ERR)
         res.json({err})
       })
@@ -46,7 +45,6 @@ let get = {
         })
       })
       .catch(err => {
-        console.log(err)
         res.status(SERVER_ERR)
         res.json({err})
       })

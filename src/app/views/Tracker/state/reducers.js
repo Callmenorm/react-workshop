@@ -11,8 +11,9 @@ const tracker = (state = {
         isFetching: true
       })
     case RECEIVE_TRACKERS:
+      console.log(action)
       return Object.assign({}, state, {
-        trackers: state.trackers
+        trackers: action.trackers
       })
     case CANCEL_NEW_TRACKER:
       return Object.assign({}, state, {

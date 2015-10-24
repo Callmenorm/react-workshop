@@ -7,9 +7,9 @@ const requestTrackers = () => ({
 })
 
 export const RECEIVE_TRACKERS = 'RECEIVE_TRACKERS'
-const receiveTrackers = (json, status) => ({
+const receiveTrackers = (trackers, status) => ({
   type: RECEIVE_TRACKERS,
-  trackers: json,
+  trackers,
   status,
   receivedAt: Date.now()
 })
@@ -19,12 +19,19 @@ export const fetchTrackers = () => {
     // dispatch comes from the thunk middleware
     dispatch(requestTrackers())
 
-    return fetch(`${dev.baseUrl}/tracker`)
+    return fetch(`${dev.baseUrl}/tracker`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
-        console.log('inside fetch')
-        return response.json
+        return response.json()
       })
-      .then(json => dispatch(receiveTrackers(json, 'success')))
+      .then(trackers => {
+        console.log('json', trackers)
+        dispatch(receiveTrackers(trackers, 'success'))
+      })
       .catch(err => {
         console.log('fetch trackers catch', err)
         dispatch(receiveTrackers([], 'error'))

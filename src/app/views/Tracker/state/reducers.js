@@ -22,7 +22,7 @@ const tracker = (state = {
       }) : state
     case NEW_TRACKER:
       return Object.assign({}, state, {
-        trackers: [...state.trackers, action.name]
+        trackers: [...state.trackers, {name: action.name, owner: 'My scummy feet', times: []}]
       })
     default:
       return state

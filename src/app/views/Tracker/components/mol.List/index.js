@@ -3,7 +3,7 @@ import Flexbox from 'obj.Flexbox'
 
 let List = React.createClass({
   propTypes: {
-    trackers: PropTypes.array
+    trackers: PropTypes.array.isRequired
   },
 
   render () {

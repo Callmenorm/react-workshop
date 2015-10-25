@@ -39,16 +39,17 @@ export const fetchTrackers = () => {
   }
 }
 
-export const NEW_TRACKER = 'NEW_TRACKER'
+export const NEW_TRACKER = 'POST_TRACKER'
 const newTracker = name => ({
   type: NEW_TRACKER,
-  name: name
+  name
 })
 
-export const CANCEL_NEW_TRACKER = 'CANCEL_NEW_TRACKER'
-const cancelNewTracker = name => ({
-  type: CANCEL_NEW_TRACKER,
-  name: name
+export const NEW_TRACKER_STATUS = 'NEW_TRACKER_STATUS'
+const newTrackerStatus = (name, status) => ({
+  type: NEW_TRACKER_STATUS,
+  name,
+  status
 })
 
 export const postTracker = trackerName => {
@@ -66,9 +67,10 @@ export const postTracker = trackerName => {
         owner: 'My scummy feet'
       })
     })
+      .then(() => dispatch(newTrackerStatus(trackerName, 'success')))
       .catch(err => {
         console.log(err)
-        dispatch(cancelNewTracker(trackerName))
+        dispatch(newTrackerStatus(trackerName, 'failure'))
       })
   }
 }

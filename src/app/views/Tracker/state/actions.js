@@ -29,7 +29,6 @@ export const fetchTrackers = () => {
         return response.json()
       })
       .then(trackers => {
-        console.log('json', trackers)
         dispatch(receiveTrackers(trackers, 'success'))
       })
       .catch(err => {

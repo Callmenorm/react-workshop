@@ -17,7 +17,6 @@ const TrackerView = React.createClass({
   },
 
   onUpdate (newActivity) {
-    console.log(newActivity)
     const {addTracker, dispatch} = this.props
     dispatch(addTracker(newActivity))
   },
@@ -45,7 +44,6 @@ let styles = {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.trackers.tracker.trackers)
   return {
     trackers: state.trackers.tracker.trackers,
     addTracker: postTracker

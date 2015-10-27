@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
 import Flexbox from 'obj.Flexbox'
+import { Link } from 'react-router'
 
 let List = React.createClass({
   propTypes: {
@@ -13,7 +14,11 @@ let List = React.createClass({
       <div>
         <Flexbox tag='ul' direction='column' wrap='wrap' align='center'>
           {trackers.map((tracker, idx) => {
-            return <li style={styles.item} key={idx}>{tracker.name}</li>
+            return (
+              <li style={styles.item} key={idx}>
+                <Link to={`/tracker/${tracker.name}`}>{tracker.name}</Link>
+              </li>
+            )
           })}
         </Flexbox>
       </div>

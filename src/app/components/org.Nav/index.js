@@ -1,7 +1,6 @@
 import style from './style'
 import React from 'react'
 import { Link } from 'react-router'
-import Router from 'utils.routing'
 import CSSModules from 'react-css-modules'
 import Flexbox from 'obj.Flexbox'
 
@@ -16,25 +15,22 @@ const links = [
   }
 ]
 
+const renderNavItem = (item, idx) => {
+  return (
+    <li styleName='item' key={idx}>
+      <Link styleName='link' to={item.to}>
+        {item.name}
+      </Link>
+    </li>
+  )
+}
+
 const Nav = React.createClass({
-  renderNavItem(item, i) {
+  render () {
     return (
-    <li styleName='item' key={i}>
-        <Link styleName='link' to={item.to}>
-          { item.name }
-        </Link>
-      </li>
-    )
-  },
-
-  render() {
-    return (
-    <Flexbox tag='header' styleName='container' justify='center'>
-
+      <Flexbox tag='header' styleName='container' justify='center'>
         <Flexbox tag='ul' justify='space-between'>
-
-          {links.map(this.renderNavItem)}
-
+          {links.map(renderNavItem)}
         </Flexbox>
       </Flexbox>
     )

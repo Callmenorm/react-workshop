@@ -9,15 +9,15 @@ const TrackerInfo = React.createClass({
     trackers: PropTypes.array.isRequired
   },
 
-  render() {
+  render () {
     let id = this.props.params.id
-    let tracker = this.props.trackers[id]
+    let tracker = this.props.trackers.filter(item => item.name === id)
 
     return (
       <View column justify='center' style={styles.container}>
-        {JSON.stringify(tracker)}
+        {JSON.stringify(tracker[0])}
       </View>
-    );
+    )
   }
 })
 
@@ -26,14 +26,14 @@ let styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignContent: 'center',
+    alignContent: 'center'
   }
 }
 
-function selector(state) {
+function selector (state) {
   return {
-    trackers: state.trackers
-  };
+    trackers: state.trackers.tracker.trackers
+  }
 }
 
 export default connect(

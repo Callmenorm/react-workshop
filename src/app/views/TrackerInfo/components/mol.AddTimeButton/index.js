@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react'
-import View from 'react-flexbox'
 
 const AddTimeButton = React.createClass({
   propTypes: {

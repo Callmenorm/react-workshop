@@ -1,7 +1,8 @@
 import React, { PropTypes} from 'react'
 import View from 'react-flexbox'
 import {connect} from 'react-redux'
-import AddTimeButton from './components/org.AddTimeButton'
+import AddTimeButton from './components/mol.AddTimeButton'
+import TrackerTimeList from './components/org.TrackerTimeList'
 
 let styles = {
   container: {
@@ -15,7 +16,6 @@ let styles = {
   }
 }
 
-// TODO: This should be a smart component, so I need to move the time list into a dumb list
 const TrackerInfo = React.createClass({
 
   propTypes: {
@@ -23,31 +23,19 @@ const TrackerInfo = React.createClass({
     trackers: PropTypes.array.isRequired
   },
 
+  onSubmit () {
+  },
+
   render () {
     let id = this.props.params.id
     let tracker = this.props.trackers.filter(item => item.name === id)
 
-    if (tracker && tracker.times && tracker.times.length > 0) {
-      return (
-        <View column width='100%' style={styles.container}>
-          {tracker[0].times.map(time => {
-            return (
-              <div style={styles.time}>{time}</div>
-            )
-          })}
-        </View>
-      )
-    } else {
-      // TODO: I need to make a component which displays this neatly
-      return (
-        <View colum style={styles.container}>
-          <div style={styles.time}>
-            No times have been recorded for this tracker
-          </div>
-          <AddTimeButton onSubmit={() => {}}/>
-        </View>
-      )
-    }
+    return (
+      <View column width='100%' style={styles.container}>
+        <TrackerTimeList times={tracker.length > 0 ? tracker[0] : []} />
+        <AddTimeButton onSubmit={this.onSubmit} />
+      </View>
+    )
   }
 })
 

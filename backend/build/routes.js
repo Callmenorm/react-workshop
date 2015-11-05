@@ -48,7 +48,7 @@ var get = {
 var post = {
   trackerData: function trackerData(req, res) {
     connFactory.getConn().then(function (conn) {
-      return r.table('trackerList').insert([req.body]).run(conn);
+      return r.table('trackerList').filter(r.row('id').eq(req.body.trackerId)).update({ times: r.row('times').append(req.body.time) }).run(conn);
     }).then(function (result) {
       res.status(OK);
       res.json(req.body);

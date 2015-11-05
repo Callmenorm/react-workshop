@@ -56,9 +56,8 @@ let post = {
     connFactory.getConn()
       .then((conn) => {
         return r.table('trackerList')
-          .insert([
-            req.body
-          ])
+          .filter(r.row('id').eq(req.body.trackerId))
+          .update({times: r.row('times').append(req.body.time)})
           .run(conn)
       })
       .then(result => {

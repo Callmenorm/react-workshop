@@ -2,11 +2,12 @@ import React, {PropTypes} from 'react'
 
 const AddTimeButton = React.createClass({
   propTypes: {
-    onSubmit: PropTypes.func.isRequired
+    postNewTime: PropTypes.func.isRequired
   },
   render () {
+    let postNewTime = this.props.postNewTime
     return (
-      <button>Button to add Time</button>
+      <button onClick={postNewTime}>Add Time</button>
     )
   }
 })

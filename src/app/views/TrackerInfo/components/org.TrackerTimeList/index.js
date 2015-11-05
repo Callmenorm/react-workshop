@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react'
 import View from 'react-flexbox'
+import moment from 'moment'
 
-const style = {
+const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -9,7 +10,8 @@ const style = {
     alignItems: 'center'
   },
   item: {
-    flex: '0 0 auto'
+    flex: '0 0 auto',
+    listStyleType: 'none'
   }
 }
 
@@ -22,17 +24,17 @@ const TrackerTimeList = React.createClass({
     let times = this.props.times
     if (times.length > 0) {
       return (
-        <View column width='100%' styles={style.container}>
-          <ul>
-            {times.map((time) => {
-              return <li styles={style.item}>time</li>
+        <View column width='100%' style={styles.item}>
+          <ul style={styles.container}>
+            {times.map((time, idx) => {
+              return <li style={styles.item} key={idx}>{moment(time).format('dddd, MMMM Do YYYY, h:mm a')}</li>
             })}
           </ul>
         </View>
       )
     } else {
       return (
-        <span styles={style.item}>There aren't any times here</span>
+        <span style={styles.item}>There aren't any times here</span>
       )
     }
   }

@@ -6,9 +6,6 @@ import routes from './config.routes'
 import routingUtils from './utils.routing'
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
 
-const env = process.env.NODE_ENV
-let panel
-
 const store = configureStore()
 
 /**
@@ -32,8 +29,7 @@ const cb = function (Handler, routerState) {
   )
 }
 
-const router = Router.create({
-routes})
+const router = Router.create({routes})
 
 /**
  * Circumvent the circular dependency so routing functions

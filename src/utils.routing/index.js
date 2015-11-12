@@ -1,11 +1,11 @@
 let _router = null
 
 export default {
-  set(router) { _router = router },
-  get() { return _router },
+  set (router) { _router = router },
+  get () { return _router },
   getCurrent,
   transitionTo,
-replaceWith}
+  replaceWith}
 
 function transitionTo (...config) {
   _router.transitionTo.apply(null, config)

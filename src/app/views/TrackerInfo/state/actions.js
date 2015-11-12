@@ -34,12 +34,18 @@ export const fetchTimes = (trackerId) => {
   return (dispatch) => {
     dispatch(getTimes(trackerId))
 
-    return fetch(`${dev.baseUrl}/tracker`, {
+    return fetch(`${dev.baseUrl}/tracker/${trackerId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
+    })
+    .then((response) => response.json())
+    .then((times) => dispatch(getTimesStatus(trackerId, times, 'success')))
+    .catch(err => {
+      console.log(err)
+      dispatch(getTimesStatus(trackerId, [], 'failure'))
     })
   }
 }

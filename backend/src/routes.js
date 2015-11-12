@@ -28,9 +28,10 @@ let get = {
       })
   },
   trackerData (req, res) {
+    let trackerId = req.params.id
     connFactory.getConn()
       .then(conn => {
-        return r.table('trackerList').run(conn)
+        return r.table('trackerList').get(trackerId)('times').run(conn)
       })
       .then(cursor => {
         cursor.toArray((err, result) => {

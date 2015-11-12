@@ -27,7 +27,7 @@ const TrackerTimeList = React.createClass({
         <View column width='100%' style={styles.item}>
           <ul style={styles.container}>
             {times.map((time, idx) => {
-              return <li style={styles.item} key={idx}>{moment(time).format('dddd, MMMM Do YYYY, h:mm a')}</li>
+              return <li style={styles.item} key={idx}>{moment(time).fromNow()}</li>
             })}
           </ul>
         </View>

@@ -3,7 +3,8 @@ import View from 'react-flexbox'
 import {connect} from 'react-redux'
 import AddTimeButton from './components/mol.AddTimeButton'
 import TrackerTimeList from './components/org.TrackerTimeList'
-import {postNewTime} from './state/actions'
+import {postNewTime, fetchTimes} from './state/actions'
+import {fetchTrackers} from '../Tracker/state/actions'
 import moment from 'moment'
 
 let styles = {
@@ -25,6 +26,18 @@ const TrackerInfo = React.createClass({
     trackers: PropTypes.array.isRequired,
     postNewTime: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
+  },
+
+  componentDidMount () {
+    let {dispatch} = this.props
+    if (this.props.trackers.length === 0) {
+      dispatch(fetchTrackers())
+    } else {
+      let {times, id} = this.props.trackers.filter(item => item.name === this.props.params.id)
+      if (times.length === 0) {
+        dispatch(fetchTimes(id))
+      }
+    }
   },
 
   onSubmit () {

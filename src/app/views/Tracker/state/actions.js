@@ -1,5 +1,7 @@
 import { dev } from 'config.env'
 import fetch from 'isomorphic-fetch'
+import {trackersSchema} from 'schema'
+import {normalize, arrayOf} from 'normalizr'
 
 export const REQUEST_TRACKERS = 'REQUEST_TRACKERS'
 const requestTrackers = () => ({
@@ -25,10 +27,11 @@ export const fetchTrackers = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => {
-        return response.json()
-      })
+      .then(response => response.json())
       .then(trackers => {
+        console.log('trackers', trackers)
+        const normalized = normalize(trackers, arrayOf(trackersSchema))
+        console.log('normalized trackers', normalized)
         dispatch(receiveTrackers(trackers, 'success'))
       })
       .catch(err => {

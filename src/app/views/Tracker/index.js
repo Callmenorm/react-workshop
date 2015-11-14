@@ -7,7 +7,8 @@ import AddTrackerForm from './components/org.AddTrackerForm'
 
 const TrackerView = React.createClass({
   propTypes: {
-    trackers: PropTypes.array.isRequired,
+    trackerIds: PropTypes.array.isRequired,
+    trackers: PropTypes.object.isRequired,
     addTracker: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   },
@@ -22,12 +23,13 @@ const TrackerView = React.createClass({
   },
 
   render () {
-    let { trackers } = this.props
-    let { onUpdate } = this
+    const {trackerIds, trackers} = this.props
+    const { onUpdate } = this
 
+    const trackersToList = trackerIds.map((id) => trackers[id])
     return (
       <View column justify='center' style={styles.container}>
-          <List trackers={ trackers } />
+          <List trackers={ trackersToList } />
           <AddTrackerForm onUpdate={onUpdate} />
       </View>
     )
@@ -45,7 +47,8 @@ let styles = {
 
 const mapStateToProps = (state) => {
   return {
-    trackers: state.trackers.tracker.trackers,
+    trackerIds: state.trackers.trackers,
+    trackers: state.entities.trackers,
     addTracker: postTracker
   }
 }

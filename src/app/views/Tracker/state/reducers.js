@@ -1,10 +1,11 @@
 import { REQUEST_TRACKERS, RECEIVE_TRACKERS, NEW_TRACKER_STATUS, NEW_TRACKER } from './actions'
-import { combineReducers } from 'redux'
 
-const tracker = (state = {
+const initialState = {
   isFetching: false,
   trackers: []
-}, action) => {
+}
+
+const tracker = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_TRACKERS:
       return Object.assign({}, state, {
@@ -28,4 +29,4 @@ const tracker = (state = {
   }
 }
 
-export const trackers = combineReducers({tracker})
+export const trackers = tracker

@@ -9,8 +9,9 @@ const requestTrackers = () => ({
 })
 
 export const RECEIVE_TRACKERS = 'RECEIVE_TRACKERS'
-const receiveTrackers = (trackers, status) => ({
+const receiveTrackers = (entities, trackers, status) => ({
   type: RECEIVE_TRACKERS,
+  entities,
   trackers,
   status,
   receivedAt: Date.now()
@@ -29,14 +30,12 @@ export const fetchTrackers = () => {
     })
       .then(response => response.json())
       .then(trackers => {
-        console.log('trackers', trackers)
         const normalized = normalize(trackers, arrayOf(trackersSchema))
-        console.log('normalized trackers', normalized)
-        dispatch(receiveTrackers(trackers, 'success'))
+        dispatch(receiveTrackers(normalized.entities, normalized.result, 'success'))
       })
       .catch(err => {
         console.log('fetch trackers catch', err)
-        dispatch(receiveTrackers([], 'error'))
+        dispatch(receiveTrackers({}, [], 'error'))
       })
   }
 }

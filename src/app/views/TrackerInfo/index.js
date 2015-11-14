@@ -33,7 +33,7 @@ const TrackerInfo = React.createClass({
     if (this.props.trackers.length === 0) {
       dispatch(fetchTrackers())
     } else {
-      let {times, id} = this.props.trackers.filter(item => item.name === this.props.params.id)
+      let {times, id} = this.props.trackers[this.props.params.id]
       if (times.length === 0) {
         dispatch(fetchTimes(id))
       }
@@ -42,18 +42,19 @@ const TrackerInfo = React.createClass({
 
   onSubmit () {
     let {postNewTime, dispatch} = this.props
-    let trackerName = this.props.params.id
-    let rethinkKey = this.props.trackers.filter(item => item.name === trackerName)
-    dispatch(postNewTime(rethinkKey[0].id, moment().format()))
+    let trackerId = this.props.params.id
+    dispatch(postNewTime(trackerId, moment().format()))
   },
 
   render () {
-    let id = this.props.params.id
-    let tracker = this.props.trackers.filter(item => item.name === id)
+    const trackerId = this.props.params.id
+    console.log('trackerId', trackerId)
+    const tracker = this.props.trackers[trackerId]
+    console.log('tracker', tracker)
 
     return (
       <View column width='100%' style={styles.container}>
-        <TrackerTimeList times={tracker.length > 0 ? tracker[0].times : []} />
+        <TrackerTimeList times={tracker.times}/>
         <AddTimeButton postNewTime={this.onSubmit} />
       </View>
     )
@@ -62,7 +63,7 @@ const TrackerInfo = React.createClass({
 
 function selector (state) {
   return {
-    trackers: state.trackers.tracker.trackers,
+    trackers: state.entities.trackers,
     postNewTime
   }
 }

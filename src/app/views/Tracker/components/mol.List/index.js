@@ -16,7 +16,7 @@ let List = React.createClass({
           {trackers.map((tracker, idx) => {
             return (
               <li style={styles.item} key={idx}>
-                <Link to={`/tracker/${tracker.name}`}>{tracker.name}</Link>
+                <Link to={`/tracker/${tracker.id}`}>{tracker.name}</Link>
               </li>
             )
           })}

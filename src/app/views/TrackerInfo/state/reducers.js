@@ -1,10 +1,11 @@
 import {NEW_TIME, NEW_TIME_STATUS} from './actions'
 import {combineReducers} from 'redux'
-
-const trackerInfoReducer = (state = {
+const initialState = {
   isFetching: false,
   times: []
-}, action) => {
+}
+
+const trackerInfoReducer = (state = initialState, action) => {
   switch (action.type) {
     case NEW_TIME:
       return Object.assign({}, state, {
